@@ -3,10 +3,10 @@ import { Reveal } from "../components/Reveal";
 import { planning } from "../content/site";
 
 const STRIP: { step: string; title: string; note: string; layers: Layer[]; zones?: boolean }[] = [
-  { step: "Before", title: "The city in 2013", note: "34.26 km² built-up", layers: [{ src: "built_2013.png", on: true }] },
-  { step: "Analysis", title: "What changed to 2024", note: "+6.35 km², off the record", layers: [{ src: "built_2013.png", on: true, opacity: 0.6 }, { src: "change_2013_2024.png", on: true }] },
-  { step: "Prediction", title: "Where it goes by 2035", note: "47.47 km², central scenario", layers: [{ src: "built_2024.png", on: true, opacity: 0.6 }, { src: "projected_2035.png", on: true }] },
-  { step: "Planning insight", title: "Where to build", note: "5 ranked candidate zones", layers: [{ src: "suitability.png", on: true, smooth: true, opacity: 0.85 }], zones: true },
+  { step: "Before", title: "The city as it was", note: "Built-up land today", layers: [{ src: "built_2013.png", on: true }] },
+  { step: "Analysis", title: "What changed", note: "New growth, off the record", layers: [{ src: "built_2013.png", on: true, opacity: 0.6 }, { src: "change_2013_2024.png", on: true }] },
+  { step: "Prediction", title: "Where it goes next", note: "Forecast growth", layers: [{ src: "built_2024.png", on: true, opacity: 0.6 }, { src: "projected_2035.png", on: true }] },
+  { step: "Planning insight", title: "Where to build", note: "Ranked candidate sites", layers: [{ src: "suitability.png", on: true, smooth: true, opacity: 0.85 }], zones: true },
 ];
 
 function layersFor(key: string): Layer[] {

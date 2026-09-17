@@ -35,9 +35,9 @@ export default function InfrastructureIntelligence({ p }: { p: Product }) {
         layers={p.layers}
         overlay="zones"
         stats={[
-          { v: `${vellore.areaKm2} km²`, k: "Vellore study area" },
-          { v: vellore.residents.toLocaleString("en-US"), k: "Residents modelled" },
-          { v: `${vellore.years} years`, k: "Satellite record" },
+          { v: "4", k: "Services in one product" },
+          { v: "30 m", k: "Analysis grid" },
+          { v: "3", k: "Validation gates" },
         ]}
         actions={
           <>
@@ -46,7 +46,7 @@ export default function InfrastructureIntelligence({ p }: { p: Product }) {
               Start a pilot
             </Link>
             <a href="#explore" className="btn btn-ghost">
-              Explore Vellore
+              See the case study
               <Arrow />
             </a>
           </>
@@ -55,7 +55,7 @@ export default function InfrastructureIntelligence({ p }: { p: Product }) {
 
       <section className="py-24 lg:py-28">
         <div className="frame">
-          <SectionHeader label="From record to recommendation" title="Four maps, one decision." />
+          <SectionHeader label="How it works" title="Four maps, one decision." />
           <div className="mt-12">
             <PlanningStrip />
           </div>
@@ -64,7 +64,7 @@ export default function InfrastructureIntelligence({ p }: { p: Product }) {
 
       <section id="explore" className="border-t border-bone/10 bg-ink-900 py-24 lg:py-28">
         <div className="frame">
-          <SectionHeader label="Vellore, Tamil Nadu" title="Explore the deployment." lede="Every layer is the engine's own output." />
+          <SectionHeader label="Case study · Vellore, Tamil Nadu" title="Tested on a real district." lede={`${vellore.areaKm2} km², ${vellore.residents.toLocaleString("en-US")} residents, ${vellore.years} years of satellite record.`} />
           <div className="mt-12">
             <VelloreExplorer />
           </div>

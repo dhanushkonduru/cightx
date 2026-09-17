@@ -157,7 +157,6 @@ export function Technology() {
                   {["Built-up · 2024", "Growth probability 2030 + projected 2035", "Composite suitability", "Candidate zones + inpatient facilities"][active]}
                 </span>
               }
-              caption="Vellore study window · 730 × 744 cells at 30 m · rendered from the pipeline's own rasters"
             />
           </div>
         </div>

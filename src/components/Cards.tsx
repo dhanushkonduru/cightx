@@ -12,7 +12,7 @@ export function StatusTag({ status }: { status: "Live" | "Planned" }) {
       }`}
     >
       <span className={`h-1.5 w-1.5 ${live ? "bg-mint" : "border border-bone/40"}`} />
-      {live ? "Live · Vellore" : "Planned"}
+      {live ? "Live" : "Planned"}
     </span>
   );
 }

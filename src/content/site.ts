@@ -48,49 +48,46 @@ export const stages: Stage[] = [
     id: "see",
     verb: "See",
     title: "Read the city from orbit",
-    plain:
-      "Every 30-metre square of the district is described by 21 measurements and its neighbourhood, then classified as built-up or not, for 2013, 2019 and 2024.",
-    output: "Built-up map for each epoch, on one common valid-cell mask",
-    method: "Pooled Random Forest",
+    plain: "Satellite imagery is turned into a map of built-up land for every year on record, one 30-metre square at a time.",
+    output: "Built-up map for each year",
+    method: "Random Forest classification",
     specs: [
-      { k: "Trees", v: "500" },
-      { k: "Features / cell", v: "21" },
-      { k: "Training cells", v: "36,000" },
-      { k: "Threshold", v: "0.70, calibrated" },
+      { k: "Input", v: "Landsat imagery" },
+      { k: "Grid", v: "30 m cells" },
+      { k: "Model", v: "Random Forest" },
+      { k: "Output", v: "Yearly built-up maps" },
     ],
     layer: "built_2024",
-    gate: { name: "Gate 1 · independent accuracy", result: "OA 0.85–0.91 · built-up F1 0.83–0.91" },
+    gate: { name: "Gate 1 · accuracy check", result: "Checked against independent reference maps" },
   },
   {
     id: "predict",
     verb: "Predict",
     title: "Learn how it grows, run it forward",
-    plain:
-      "A neural network learns which land converts and why. A cellular automaton redraws the map each simulated year. How much growth comes only from what the city actually did.",
-    output: "Projected built-up land for 2030 and 2035, with low / central / high extents",
-    method: "Cellular automaton + neural network",
+    plain: "The engine learns which land turns into buildings and why, then runs the city forward year by year.",
+    output: "Where growth is likely over the next 5 to 10 years",
+    method: "Neural network + cellular automaton",
     specs: [
-      { k: "Drivers", v: "7" },
-      { k: "Network", v: "7 → 128 → 64 → 32 → 1" },
-      { k: "Validation AUC", v: "0.9405" },
-      { k: "Rate 2013–24", v: "0.131% / yr, measured" },
+      { k: "Drivers", v: "Roads, density, water, services" },
+      { k: "Model", v: "Neural network" },
+      { k: "Horizon", v: "5–10 years" },
+      { k: "Growth rate", v: "Measured, never assumed" },
     ],
     layer: "growth_prob_2030",
-    gate: { name: "Gate 2 · hindcast vs no-change", result: "FoM 0.042 vs 0 · beats persistence on 6 of 6 runs" },
+    gate: { name: "Gate 2 · hindcast", result: "Must beat a no-change forecast on past years" },
   },
   {
     id: "score",
     verb: "Score",
     title: "Weigh the forecast against today",
-    plain:
-      "Six criteria — population, drive time to care, growth alignment, road access, water proximity and free land — are combined with weights that are published and checked for consistency.",
-    output: "A suitability score for every 30-metre cell",
+    plain: "Each location is scored on the criteria that matter for the question, with the forecast as one of them.",
+    output: "A suitability score for every cell",
     method: "Analytic Hierarchy Process",
     specs: [
-      { k: "Criteria", v: "6" },
-      { k: "Consistency ratio", v: "0.0117" },
-      { k: "Growth weight", v: "20.5%" },
-      { k: "Alt. weightings", v: "3, carried through" },
+      { k: "Criteria", v: "Set per use case" },
+      { k: "Weights", v: "Published" },
+      { k: "Consistency", v: "Checked" },
+      { k: "Output", v: "Suitability surface" },
     ],
     layer: "suitability",
   },
@@ -98,57 +95,18 @@ export const stages: Stage[] = [
     id: "rank",
     verb: "Rank",
     title: "Turn scores into places",
-    plain:
-      "The best-scoring land becomes contiguous candidate zones, ranked by a published formula, and scored on how many residents each brings within a real drive time.",
-    output: "Ranked candidate zones, each with the reason it ranked",
-    method: "Zone extraction + road-network routing",
+    plain: "The best land becomes real candidate sites, ranked, and measured by how many people each one serves.",
+    output: "A ranked shortlist, each site with its reasons",
+    method: "Zone extraction + road routing",
     specs: [
-      { k: "Road graph", v: "21,978 nodes · 4,613 km" },
-      { k: "Routing", v: "Dijkstra, multi-source" },
-      { k: "Coverage", v: "Population-weighted" },
-      { k: "Detour ratio", v: "1.383 × straight line" },
+      { k: "Sites", v: "Contiguous, buildable land" },
+      { k: "Access", v: "Real road network" },
+      { k: "Coverage", v: "Weighted by population" },
+      { k: "Output", v: "Ranked shortlist" },
     ],
     layer: "zones",
-    gate: { name: "Gate 3 · sensitivity sweeps", result: "Leading zone holds first in every growth-weight, threshold and drive-time sweep" },
+    gate: { name: "Gate 3 · stress test", result: "Top picks re-checked under changed assumptions" },
   },
-];
-
-// data/processed/ahp/ahp_weights.json via README AHP table
-export const criteria = [
-  { id: "c1", name: "Population density", weight: 34.1, from: "WorldPop 2020, 450 m moving mean" },
-  { id: "c2", name: "Service gap", weight: 20.5, from: "Network travel time to inpatient care" },
-  { id: "c3", name: "Growth alignment", weight: 20.5, from: "Distance to CA-ANN 2030–35 hotspots", forecast: true },
-  { id: "c4", name: "Road access", weight: 12.3, from: "Distance to OSM road network" },
-  { id: "c5", name: "Water proximity", weight: 7.6, from: "JRC Global Surface Water buffer" },
-  { id: "c6", name: "Land availability", weight: 5.0, from: "Non-built, non-water cells" },
-];
-
-// data/processed/audit/hindcast_2024.json, hindcast_replicates.json
-export const hindcast = {
-  observedNewCells: 9031,
-  models: [
-    { id: "persistence", name: "“Nothing changes”", oa: 0.9761, fom: 0.0, hits: 0 },
-    { id: "ca_ann", name: "CA-ANN (ours)", oa: 0.9751, fom: 0.0422, hits: 421, range: [0.0313, 0.056] as [number, number] },
-  ],
-  replicates: 6,
-};
-
-// data/processed/lulc/accuracy_assessment.json via README and REVISION_RESPONSE.md
-export const classification = {
-  oa: "0.85–0.91",
-  kappa: "0.71–0.82",
-  f1: "0.83–0.91",
-  products: 3,
-  blocksWithheld: "8 of 25",
-  visualCheck: "0.88–0.90 on 56–58 photo-interpreted points",
-};
-
-// data/processed/audit/sensitivity_summary.json, How_It_Works §6
-export const sensitivity = [
-  { sweep: "Growth weight 0–30%", held: "7 / 7" },
-  { sweep: "Candidate threshold P75–P90", held: "4 / 4" },
-  { sweep: "Drive-time standard 10 / 15 / 20 min", held: "3 / 3" },
-  { sweep: "Equal and operations-first weights", held: "2 / 2" },
 ];
 
 // data/processed/audit/coverage_population_weighted.json, baseline_vs_prospective.json

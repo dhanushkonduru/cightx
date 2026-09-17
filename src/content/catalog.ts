@@ -29,9 +29,9 @@ export const services: Service[] = [
       { src: "projected_2035.png", on: true },
     ],
     stats: [
-      { v: "34.26 → 40.61 km²", k: "Vellore built-up, 2013–2024" },
-      { v: "47.47 km²", k: "Projected by 2035, central" },
-      { v: "6 / 6", k: "Hindcast runs beating no-change" },
+      { v: "30 m", k: "Grid resolution" },
+      { v: "5–10 years", k: "Forecast horizon" },
+      { v: "Tested", k: "Against past years before use" },
     ],
     deliverables: [
       { t: "Growth history", d: "Built-up land for every observed year." },
@@ -50,9 +50,9 @@ export const services: Service[] = [
     layers: [{ src: "suitability.png", on: true, smooth: true, opacity: 0.85 }],
     overlay: "zones",
     stats: [
-      { v: "+14,417", k: "Residents within 15 min, Zone 01" },
-      { v: "0.0117", k: "AHP consistency ratio" },
-      { v: "7 / 7", k: "Growth weights where Zone 01 holds" },
+      { v: "30 m", k: "Every cell scored" },
+      { v: "Ranked", k: "Shortlist with reasons" },
+      { v: "Stress-tested", k: "Under changed assumptions" },
     ],
     deliverables: [
       { t: "Suitability surface", d: "Six weighted criteria at 30 m." },
@@ -71,9 +71,9 @@ export const services: Service[] = [
     layers: [{ src: "travel_time.png", on: true, smooth: true, opacity: 0.9 }],
     overlay: "facilities",
     stats: [
-      { v: "91.67%", k: "Vellore residents within 15 min" },
-      { v: "1.38×", k: "Road vs straight-line distance" },
-      { v: "4,613 km", k: "Road network routed" },
+      { v: "Minutes", k: "Real travel time by road" },
+      { v: "People", k: "Coverage weighted by population" },
+      { v: "Per site", k: "Gain from each option" },
     ],
     deliverables: [
       { t: "Drive-time surface", d: "Minutes to the nearest facility." },
@@ -94,9 +94,9 @@ export const services: Service[] = [
       { src: "change_2013_2024.png", on: true },
     ],
     stats: [
-      { v: "0.85–0.91", k: "Overall accuracy" },
-      { v: "3", k: "Independent reference products" },
-      { v: "97.4%", k: "Window observable, all years" },
+      { v: "30 m", k: "Satellite resolution" },
+      { v: "Yearly", k: "Change between years" },
+      { v: "Checked", k: "Against independent maps" },
     ],
     deliverables: [
       { t: "Built-up maps", d: "30 m, per year." },
@@ -128,7 +128,7 @@ export const products: Product[] = [
     short: "Where hospitals, schools and civic facilities should go.",
     status: "Live",
     headline: "Site public infrastructure for the city ahead.",
-    lede: "Our flagship. Running on Vellore, Tamil Nadu — hindcast, swept and ranked end to end.",
+    lede: "Our flagship product, already running on a real city.",
     questions: ["Where should the next hospital go?", "Which areas are underserved today?", "Will the site still fit in 2035?"],
     audience: ["Municipal corporations", "State planning bodies", "Hospital and education groups"],
     uses: ["urban-growth-forecasting", "site-selection", "accessibility-analysis", "land-cover-mapping"],
@@ -196,7 +196,7 @@ export const companyPages = [
 export const vision = {
   statement: "Every city decides where to build with a tested view of where it is going.",
   pillars: [
-    { t: "Beyond one city", d: "From Vellore to Tier-2 and Tier-3 cities across India." },
+    { t: "Beyond one city", d: "From one district to Tier-2 and Tier-3 cities across India." },
     { t: "Beyond one facility", d: "Hospitals first, then schools, commerce, risk and environment." },
     { t: "Beyond one decision", d: "A living forecast, refreshed as the satellite record grows." },
   ],
@@ -210,7 +210,7 @@ export const values = [
 ];
 
 export const journey = [
-  { t: "Prototype", d: "Growth model and siting engine built for Vellore." },
+  { t: "Prototype", d: "Growth model and siting engine built and tested on a real district." },
   { t: "Independent validation", d: "Maps scored against three global reference products." },
   { t: "Validation gates", d: "Hindcast and sensitivity testing built into the engine." },
   { t: "Research outputs", d: "Manuscript and invention disclosure prepared." },

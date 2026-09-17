@@ -9,7 +9,7 @@ import { products } from "../content/catalog";
 import { usePageMeta } from "../lib/usePageMeta";
 
 export default function Products() {
-  usePageMeta("Products", "Infrastructure Intelligence is live on Vellore. Commercial, risk, environmental and governance intelligence are planned on the same engine.");
+  usePageMeta("Products", "Infrastructure Intelligence is live. Commercial, risk, environmental and governance intelligence are planned on the same engine.");
   const [flagship, ...planned] = products;
 
   return (

@@ -1,5 +1,4 @@
 import { CTABand } from "../components/CTABand";
-import { Counter } from "../components/Counter";
 import { PageHero } from "../components/PageHero";
 import { Reveal } from "../components/Reveal";
 import { SectionHeader } from "../components/SectionHeader";
@@ -36,17 +35,14 @@ export default function Mission() {
             </Reveal>
             <Reveal delay={80} className="bg-ink">
               <div className="p-7">
-                <p className="text-[52px] font-medium leading-none tracking-[-0.05em] text-bone">
-                  +<Counter value={6.35} decimals={2} />
-                  <span className="ml-1 text-[18px] text-bone/45">km²</span>
-                </p>
-                <p className="mt-3 text-[15px] text-bone/55">Built in Vellore, 2013–2024. Off the record.</p>
+                <p className="text-[52px] font-medium leading-none tracking-[-0.05em] text-bone">Decades</p>
+                <p className="mt-3 text-[15px] text-bone/55">How long a building stays where it is put.</p>
               </div>
             </Reveal>
             <Reveal delay={160} className="bg-ink">
               <div className="p-7">
-                <p className="text-[52px] font-medium leading-none tracking-[-0.05em] text-bone">~4×</p>
-                <p className="mt-3 text-[15px] text-bone/55">Faster building in 2019–24 than 2013–19.</p>
+                <p className="text-[52px] font-medium leading-none tracking-[-0.05em] text-bone">Every year</p>
+                <p className="mt-3 text-[15px] text-bone/55">How often a growing city changes shape.</p>
               </div>
             </Reveal>
           </div>

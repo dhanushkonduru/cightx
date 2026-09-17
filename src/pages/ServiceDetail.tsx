@@ -39,8 +39,8 @@ export default function ServiceDetail() {
               <span className="btn-dot" />
               Request this service
             </Link>
-            <Link to="/products/infrastructure-intelligence" className="btn btn-ghost">
-              See it on Vellore
+            <Link to="/services" className="btn btn-ghost">
+              All services
               <Arrow />
             </Link>
           </>
@@ -67,9 +67,8 @@ export default function ServiceDetail() {
       <MapBand layers={s.layers} overlay={s.overlay} focus={s.overlay === "zones" ? "top" : "center"} className="min-h-[460px] lg:min-h-[560px]">
         <Reveal className="w-full">
           <div className="max-w-lg">
-            <p className="eyebrow">Running on Vellore</p>
-            <p className="display mt-6 text-[clamp(2.6rem,5vw,4.4rem)]">{s.stats[0].v}</p>
-            <p className="mt-3 text-[17px] text-bone/65">{s.stats[0].k}</p>
+            <p className="eyebrow">{s.name}</p>
+            <p className="display mt-6 text-[clamp(2.2rem,4.4vw,3.8rem)]">{s.short}</p>
           </div>
         </Reveal>
       </MapBand>

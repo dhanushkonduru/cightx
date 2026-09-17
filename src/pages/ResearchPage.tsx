@@ -4,7 +4,7 @@ import { usePageMeta } from "../lib/usePageMeta";
 import { Research } from "../sections/Research";
 
 export default function ResearchPage() {
-  usePageMeta("Research", "CightX research: a manuscript on growth-aware hospital siting in Vellore, an invention disclosure, and a fully reproducible open-data pipeline.");
+  usePageMeta("Research", "CightX research: a manuscript on growth-aware infrastructure siting, an invention disclosure, and a fully reproducible open-data pipeline.");
   return (
     <>
       <PageHero
