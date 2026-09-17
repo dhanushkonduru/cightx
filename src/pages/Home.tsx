@@ -1,143 +1,149 @@
 import { Link } from "react-router-dom";
 import { Arrow } from "../components/Arrow";
 import { CTABand } from "../components/CTABand";
-import { ProductTile, ServiceCard, StatusTag } from "../components/Cards";
+import { PlannedTile, ProductBadge, StatusTag, TechCard } from "../components/Cards";
 import { MapBand } from "../components/MapBand";
+import { ProductWindow } from "../components/ProductWindow";
 import { Reveal } from "../components/Reveal";
 import { SectionHeader } from "../components/SectionHeader";
-import { products, services, values } from "../content/catalog";
-import { stages } from "../content/site";
+import { companyIdentity, flagship, roadmap, technologies, values } from "../content/catalog";
 import { Hero } from "../hero/Hero";
 import { usePageMeta } from "../lib/usePageMeta";
 import { DataBand } from "../sections/DataBand";
 
+const RESEARCH = [
+  { k: "Manuscript", v: "Growth-aware infrastructure siting with independent validation", to: "/research" },
+  { k: "Invention disclosure", v: "Hindcast skill gating of Earth-observation-derived criteria", to: "/research" },
+  { k: "Open methods", v: "Every result rebuilds from open data and published code", to: "/research" },
+];
+
 export default function Home() {
   usePageMeta(
     "CightX",
-    "CightX forecasts urban growth from satellite data and ranks sites for hospitals and public infrastructure, with every forecast tested against history.",
+    "CightX is a geospatial and predictive AI company building satellite-data, simulation and decision systems for cities. Flagship product: the CightX Urban Growth Platform.",
   );
-  const [flagship, ...planned] = products;
 
   return (
     <>
       <Hero />
       <DataBand />
 
-      {/* services */}
+      {/* 1 · the company: what CightX builds */}
       <section className="py-24 lg:py-32">
         <div className="frame">
-          <SectionHeader label="Services" title="What we deliver." lede="Four services, one validated engine." />
+          <SectionHeader
+            label="What CightX builds"
+            title={
+              <>
+                Four technologies. <span className="text-bone/45">One intelligence layer for the built environment.</span>
+              </>
+            }
+            lede="We develop the core technology in-house, from satellite pipelines to simulation engines, and build products on top of it."
+          />
           <div className="mt-14 grid gap-px border border-bone/10 bg-bone/10 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 70} className="bg-ink">
-                <ServiceCard s={s} index={i} />
+            {technologies.map((t, i) => (
+              <Reveal key={t.slug} delay={i * 70} className="bg-ink">
+                <TechCard t={t} index={i} />
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* products */}
-      <section className="border-t border-bone/10 pb-14 pt-24 lg:pt-32">
-        <div className="frame">
-          <SectionHeader label="Products" title="One engine. Five questions." lede="One product is live. Four are on the roadmap." />
-        </div>
-      </section>
-
-      <MapBand layers={[{ src: "suitability.png", on: true, smooth: true, opacity: 0.9 }]} overlay="zones" focus="top">
-        <Reveal className="w-full">
-          <div className="max-w-xl">
-            <StatusTag status="Live" />
-            <h3 className="mt-8 text-[clamp(2.2rem,4vw,3.6rem)] font-medium leading-[1.0] tracking-[-0.04em] text-bone">{flagship.name}</h3>
-            <p className="mt-4 max-w-md text-[17px] leading-relaxed text-bone/65">{flagship.short}</p>
-            <ul className="mt-8 space-y-2">
-              {flagship.questions.map((q) => (
-                <li key={q} className="flex items-center gap-3 text-[15px] text-bone/85">
-                  <span className="h-px w-3 bg-laterite" />
-                  {q}
-                </li>
-              ))}
-            </ul>
-            <Link to={`/products/${flagship.slug}`} className="btn btn-primary mt-10">
-              <span className="btn-dot" />
-              Explore Infrastructure Intelligence
-            </Link>
-          </div>
-        </Reveal>
-      </MapBand>
-
-      <section className="pb-24 pt-px lg:pb-32">
-        <div className="frame">
-          <div className="grid gap-px border border-t-0 border-bone/10 bg-bone/10 sm:grid-cols-2 lg:grid-cols-4">
-            {planned.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 70} className="bg-ink">
-                <ProductTile p={p} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* how it works */}
-      <section className="py-24 lg:py-32">
-        <div className="frame">
-          <SectionHeader label="How it works" title="See. Predict. Score. Rank." lede="Nothing reaches a recommendation until it passes a test." />
-          <ol className="mt-14 grid gap-px border border-bone/10 bg-bone/10 sm:grid-cols-2 lg:grid-cols-4">
-            {stages.map((s, i) => (
-              <Reveal as="li" key={s.id} delay={i * 80} className="bg-ink">
-                <div className="flex h-full flex-col p-6 sm:p-7">
-                  <span className="font-mono text-[11px] text-bone/40">0{i + 1}</span>
-                  <h3 className="mt-8 text-[28px] font-medium tracking-[-0.04em] text-bone">{s.verb}</h3>
-                  <p className="mt-2 text-[14.5px] leading-relaxed text-bone/55">{s.title}</p>
-                  <p className="mt-auto pt-8 font-mono text-[10.5px] text-bone/40">{s.method}</p>
-                  {s.gate && (
-                    <p className="mt-3 flex items-center gap-2 font-mono text-[10.5px] text-mint/80">
-                      <span className="h-1.5 w-1.5 rotate-45 border border-mint" />
-                      {s.gate.name.split(" · ")[0]} passed
-                    </p>
-                  )}
-                </div>
-              </Reveal>
-            ))}
-          </ol>
           <Reveal className="mt-8">
-            <Link to="/company/technology" className="inline-flex items-center gap-2 text-[14px] text-laterite hover:text-laterite-soft">
-              Explore the technology
+            <Link to="/technology" className="inline-flex items-center gap-2 text-[14px] text-laterite hover:text-laterite-soft">
+              Explore our technology
               <Arrow />
             </Link>
           </Reveal>
         </div>
       </section>
 
+      {/* 2 · the domain */}
       <MapBand
         layers={[
           { src: "built_2024.png", on: true, opacity: 0.55 },
           { src: "growth_prob_2030.png", on: true, smooth: true },
           { src: "projected_2035.png", on: true },
         ]}
-        focus="center"
+        className="min-h-[440px] lg:min-h-[520px]"
       >
         <Reveal className="w-full">
           <div className="max-w-xl">
-            <p className="eyebrow">Urban Growth Forecasting</p>
-            <h2 className="display mt-6 text-[clamp(2.2rem,4.4vw,4rem)]">
-              See a city grow <span className="font-serif font-normal italic">before it does.</span>
+            <p className="eyebrow">Our focus · {companyIdentity.focus}</p>
+            <h2 className="display mt-6 text-[clamp(2.1rem,4.2vw,3.8rem)]">
+              Cities change every year. <span className="font-serif font-normal italic">Plans should too.</span>
             </h2>
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-bone/65">
-              Years of satellite imagery turned into a forecast of where a city grows next, tested against history first.
-            </p>
-            <Link to="/services/urban-growth-forecasting" className="btn btn-ghost mt-10">
-              Urban Growth Forecasting
-              <Arrow />
-            </Link>
+            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-bone/65">{companyIdentity.focusLine}</p>
           </div>
         </Reveal>
       </MapBand>
 
-      {/* why */}
-      <section className="bg-ink-900 py-24 lg:py-32">
+      {/* 3 · the flagship product, framed as something CightX makes */}
+      <section className="border-b border-bone/10 bg-ink-900 py-24 lg:py-32">
         <div className="frame">
-          <SectionHeader label="Why CightX" title="Forecasts you can check." />
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <Reveal className="lg:col-span-5">
+              <div>
+                <div className="flex flex-wrap items-center gap-4">
+                  <ProductBadge label="Flagship product" />
+                  <StatusTag status="Live" />
+                </div>
+                <h2 className="mt-8 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.0] tracking-[-0.04em] text-bone">
+                  {flagship.name}
+                </h2>
+                <p className="mt-5 font-serif text-[clamp(1.5rem,2.4vw,2rem)] italic leading-[1.2] text-bone/85">{flagship.tagline}</p>
+                <p className="mt-5 max-w-md text-[16px] leading-relaxed text-bone/60">{flagship.lede}</p>
+                <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-2.5">
+                  {flagship.modules.map((m) => (
+                    <li key={m.t} className="flex items-center gap-2.5 text-[14.5px] text-bone/80">
+                      <span className="h-1.5 w-1.5 bg-laterite" />
+                      {m.t}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-10 flex flex-wrap gap-3">
+                  <Link to={`/products/${flagship.slug}`} className="btn btn-primary">
+                    <span className="btn-dot" />
+                    Explore the platform
+                  </Link>
+                  <Link to="/contact" className="btn btn-ghost">
+                    Request a pilot
+                    <Arrow />
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={120} className="lg:col-span-7">
+              <ProductWindow />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 4 · the product roadmap, on the same technology */}
+      <section className="py-24 lg:py-32">
+        <div className="frame">
+          <SectionHeader
+            label="Product roadmap"
+            title={
+              <>
+                More products, <span className="text-bone/45">same technology base.</span>
+              </>
+            }
+            lede="Each planned product reuses the technology behind the Urban Growth Platform for a new kind of decision."
+          />
+          <div className="mt-14 grid gap-px border border-bone/10 bg-bone/10 sm:grid-cols-2 lg:grid-cols-4">
+            {roadmap.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 70} className="bg-ink">
+                <PlannedTile p={p} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5 · how the company works: principles and research */}
+      <section className="border-t border-bone/10 bg-ink-900 py-24 lg:py-32">
+        <div className="frame">
+          <SectionHeader label="How we work" title="Research-grade, by design." lede="Everything CightX ships is tested against evidence it has never seen." />
           <div className="mt-14 grid gap-px border border-bone/10 bg-bone/10 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((val, i) => (
               <Reveal key={val.t} delay={i * 70} className="bg-ink-900">
@@ -149,10 +155,26 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+          <div className="mt-px grid gap-px border border-t-0 border-bone/10 bg-bone/10 md:grid-cols-3">
+            {RESEARCH.map((r) => (
+              <Link key={r.k} to={r.to} className="group flex items-start justify-between gap-6 bg-ink-900 p-6 transition-colors hover:bg-ink-800 sm:p-7">
+                <span>
+                  <span className="tick">{r.k}</span>
+                  <span className="mt-2 block text-[15px] leading-snug text-bone/80">{r.v}</span>
+                </span>
+                <Arrow className="mt-1 shrink-0 text-bone/30 transition-all group-hover:translate-x-1 group-hover:text-laterite" />
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      <CTABand />
+      <CTABand
+        title="Build the cities ahead with us."
+        lede="Pilot cities, research partners and engineers who care about cities: we'd like to hear from you."
+        primary={{ label: "Contact us", to: "/contact" }}
+        secondary={{ label: "Careers", to: "/careers" }}
+      />
     </>
   );
 }

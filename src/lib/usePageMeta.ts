@@ -4,7 +4,7 @@ const SITE = "CightX";
 
 export function usePageMeta(title: string, description: string) {
   useEffect(() => {
-    document.title = title === SITE ? `${SITE} — Where to build next, before the city gets there` : `${title} — ${SITE}`;
+    document.title = title === SITE ? `${SITE} — Building intelligence for the cities ahead` : `${title} — ${SITE}`;
     const set = (sel: string, attr: string, value: string) => {
       const el = document.head.querySelector(sel);
       if (el) el.setAttribute(attr, value);

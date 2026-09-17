@@ -13,21 +13,28 @@ React Router for pages and three.js / React Three Fiber for the home hero.
 
 ## Pages
 
+The site follows a company → technology → product hierarchy. CightX is the
+company; the Urban Growth Platform is its flagship product.
+
 | Route | Page |
 |---|---|
-| `/` | Home |
-| `/services`, `/services/:slug` | Four services |
-| `/products`, `/products/:slug` | Infrastructure Intelligence (live, Vellore) and four planned products |
-| `/company/mission`, `/company/technology`, `/company/research` | Company |
-| `/about`, `/careers`, `/contact` | About Us, Careers, Contact Us |
-| `/privacy-policy` | Privacy Policy |
+| `/` | Home: company, core technologies, flagship product, roadmap |
+| `/company` | About, mission, vision, values, journey, team |
+| `/technology`, `/technology/:slug` | Four core technologies |
+| `/products` | Product overview |
+| `/products/urban-growth-platform` | Flagship product, with the Vellore case study |
+| `/products/:slug` | Planned products |
+| `/research`, `/careers`, `/contact`, `/privacy-policy` | |
+
+Old routes (`/services`, `/about`, `/company/mission`, `/products/infrastructure-intelligence`
+and others) redirect to their new pages in `src/App.tsx`.
 
 It is a single-page app, so the host must send unknown paths to `index.html`
 (`vercel.json` handles this on Vercel).
 
 ## Where the content comes from
 
-- `src/content/catalog.ts` holds the services, products and company page copy.
+- `src/content/catalog.ts` holds company, technology and product copy.
 - `src/content/site.ts` holds every number, each next to the audit file it was
   read from. Edit copy in these two files, not in the pages.
 - `public/maps/*.png`, `public/data/vellore_field.bin` and

@@ -2,7 +2,8 @@ import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import type { Shared } from "./HeroScene";
 import { Arrow } from "../components/Arrow";
 import { Link } from "react-router-dom";
-import { company } from "../content/site";
+import { ProductBadge } from "../components/Cards";
+import { companyIdentity, flagship } from "../content/catalog";
 import { prefersReducedMotion } from "../lib/useInView";
 import { timeline } from "./timeline";
 
@@ -91,7 +92,7 @@ export function Hero() {
       id="top"
       ref={section}
       className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink"
-      aria-label="CightX — where to build next"
+      aria-label="CightX, building intelligence for the cities ahead"
     >
       {/* scene */}
       <div className="absolute inset-x-0 top-0 -z-10 h-[64svh] lg:inset-0 lg:h-auto">
@@ -113,34 +114,48 @@ export function Hero() {
         <div className="lg:col-span-7">
           <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-bone/15 bg-ink/40 py-1.5 pl-2 pr-3.5 backdrop-blur">
             <span className="h-1.5 w-1.5 bg-laterite" />
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-bone/75">
-              <span className="sm:hidden">Built-environment intelligence</span>
-              <span className="hidden sm:inline">{company.descriptor}</span>
-            </span>
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-bone/75">{companyIdentity.kind}</span>
           </div>
           <h1 className="display text-[clamp(2.35rem,5.4vw,5.2rem)]">
-            Where to build next,
+            Building intelligence
             <br />
-            <span className="text-bone/45">before the city</span>
-            <br />
-            <span className="font-serif font-normal italic tracking-[-0.02em] text-bone">gets there.</span>
+            <span className="text-bone/45">for the cities</span>{" "}
+            <span className="font-serif font-normal italic tracking-[-0.02em] text-bone">ahead.</span>
           </h1>
-          <p className="lede mt-7 max-w-[34rem]">
-            We forecast how cities grow from satellite data and tell you where new infrastructure should go —
-            tested against history first.
-          </p>
+          <p className="lede mt-7 max-w-[36rem]">{companyIdentity.summary}</p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Link to="/contact" className="btn btn-primary">
+            <Link to="/technology" className="btn btn-primary">
               <span className="btn-dot" />
-              Talk to us
+              Our technology
             </Link>
-            <Link to="/products" className="btn btn-ghost">
-              Explore products
+            <Link to="/company" className="btn btn-ghost">
+              About CightX
               <Arrow />
             </Link>
           </div>
         </div>
 
+        {/* flagship product, clearly separate from the company statement */}
+        <div className="lg:col-span-5 lg:justify-self-end">
+          <Link
+            to={`/products/${flagship.slug}`}
+            className="group block w-full max-w-[400px] border border-bone/15 bg-ink/70 p-5 backdrop-blur-md transition-colors hover:border-bone/35 lg:w-[380px]"
+          >
+            <div className="flex items-center justify-between">
+              <ProductBadge label="Flagship product" />
+              <span className="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-mint">
+                <span className="h-1.5 w-1.5 rounded-full bg-mint" />
+                Live
+              </span>
+            </div>
+            <p className="mt-4 text-[22px] font-medium leading-tight tracking-[-0.03em] text-bone">{flagship.fullName}</p>
+            <p className="mt-1.5 text-[14.5px] text-bone/60">{flagship.tagline}</p>
+            <span className="mt-4 inline-flex items-center gap-2 text-[13.5px] text-laterite">
+              Explore the platform
+              <Arrow className="transition-transform group-hover:translate-x-1" />
+            </span>
+          </Link>
+        </div>
       </div>
     </section>
   );

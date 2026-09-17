@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { companyPages, products, services } from "../content/catalog";
+import { flagship, roadmap, technologies } from "../content/catalog";
 import { company } from "../content/site";
 import { Arrow } from "./Arrow";
 import { Logo } from "./Logo";
@@ -10,12 +10,26 @@ type Menu = { key: string; label: string; base: string; title: string; overview:
 
 const MENUS: Menu[] = [
   {
-    key: "services",
-    label: "Services",
-    base: "/services",
-    title: "CightX Services",
-    overview: { to: "/services", label: "All services" },
-    items: services.map((s) => ({ to: `/services/${s.slug}`, name: s.name, short: s.short })),
+    key: "company",
+    label: "Company",
+    base: "/company",
+    title: "CightX Company",
+    overview: { to: "/company", label: "About CightX" },
+    items: [
+      { to: "/company#mission", name: "Mission", short: "Why CightX exists." },
+      { to: "/company#vision", name: "Vision", short: "Where we are headed." },
+      { to: "/company#values", name: "Values", short: "How we work." },
+      { to: "/company#team", name: "Team", short: "The people building CightX." },
+      { to: "/careers", name: "Careers", short: "Build it with us." },
+    ],
+  },
+  {
+    key: "technology",
+    label: "Technology",
+    base: "/technology",
+    title: "CightX Technology",
+    overview: { to: "/technology", label: "Technology overview" },
+    items: technologies.map((t) => ({ to: `/technology/${t.slug}`, name: t.name, short: t.short })),
   },
   {
     key: "products",
@@ -23,22 +37,16 @@ const MENUS: Menu[] = [
     base: "/products",
     title: "CightX Products",
     overview: { to: "/products", label: "All products" },
-    items: products.map((p) => ({ to: `/products/${p.slug}`, name: p.name, short: p.short, tag: p.status })),
-  },
-  {
-    key: "company",
-    label: "Company",
-    base: "/company",
-    title: "CightX Company",
-    overview: { to: "/about", label: "About CightX" },
-    items: companyPages,
+    items: [
+      { to: `/products/${flagship.slug}`, name: flagship.name, short: flagship.tagline, tag: "Flagship" },
+      ...roadmap.map((p) => ({ to: `/products/${p.slug}`, name: p.name, short: p.short, tag: "Planned" })),
+    ],
   },
 ];
 
 const LINKS = [
-  { to: "/about", label: "About Us" },
-  { to: "/careers", label: "Careers" },
-  { to: "/contact", label: "Contact Us" },
+  { to: "/research", label: "Research" },
+  { to: "/contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -198,7 +206,7 @@ export function Navbar() {
                     >
                       <span className="text-[15.5px] font-medium tracking-[-0.01em] text-laterite-soft transition-colors group-hover:text-bone">{it.name}</span>
                       {it.tag && (
-                        <span className={`mt-2 font-mono text-[9px] uppercase tracking-[0.14em] ${it.tag === "Live" ? "text-mint" : "text-bone/35"}`}>{it.tag}</span>
+                        <span className={`mt-2 font-mono text-[9px] uppercase tracking-[0.14em] ${it.tag !== "Planned" ? "text-mint" : "text-bone/35"}`}>{it.tag}</span>
                       )}
                       <span className="mt-2 hidden max-w-[200px] text-[12.5px] leading-snug text-bone/40 xl:block">{it.short}</span>
                       <span className="absolute inset-x-6 bottom-0 h-[2px] origin-center scale-x-0 bg-laterite transition-transform duration-300 group-hover:scale-x-100" />
@@ -237,7 +245,7 @@ export function Navbar() {
                       <li key={it.to}>
                         <Link to={it.to} className="flex items-center justify-between py-2.5 pl-1 text-[15px] text-bone/70">
                           {it.name}
-                          {it.tag && <span className={`font-mono text-[9.5px] uppercase ${it.tag === "Live" ? "text-mint" : "text-bone/35"}`}>{it.tag}</span>}
+                          {it.tag && <span className={`font-mono text-[9.5px] uppercase ${it.tag !== "Planned" ? "text-mint" : "text-bone/35"}`}>{it.tag}</span>}
                         </Link>
                       </li>
                     ))}

@@ -1,221 +1,254 @@
-// Services, products and company pages. Copy is kept short on purpose:
-// a headline, one sentence, and facts that come from site.ts or the audit files.
+// Company, technology and product content. The hierarchy is deliberate:
+// CightX (company) → technology it builds → products built on that technology.
+// Keep product language out of company copy, and company language out of product copy.
 
 import type { Layer } from "../components/MapStage";
 
-export type Service = {
+/* ---------------------------------------------------------------- company */
+
+export const companyIdentity = {
+  kind: "Geospatial & predictive AI company",
+  headline: "Building intelligence for the cities ahead.",
+  summary:
+    "CightX is a deep-tech company building AI, satellite-data and simulation systems that show how cities are changing, and what to build as they do.",
+  focus: "Urban intelligence",
+  focusLine: "Cities change every year. We build the systems that see that change, forecast it, and turn it into decisions.",
+};
+
+/* ------------------------------------------------------------- technology */
+
+export type Technology = {
   slug: string;
   name: string;
-  short: string; // nav + cards
+  short: string;
   headline: string;
   lede: string;
   layers: Layer[];
   overlay?: "zones" | "facilities";
   stats: { v: string; k: string }[];
-  deliverables: { t: string; d: string }[];
-  informs: string[];
+  builds: { t: string; d: string }[];
 };
 
-export const services: Service[] = [
+export const technologies: Technology[] = [
   {
-    slug: "urban-growth-forecasting",
-    name: "Urban Growth Forecasting",
-    short: "Where a city has grown, and where it grows next.",
-    headline: "See where the city is heading.",
-    lede: "A decade of satellite record turned into a tested forecast of built-up growth to 2030 and 2035.",
-    layers: [
-      { src: "built_2024.png", on: true, opacity: 0.45 },
-      { src: "growth_prob_2030.png", on: true, smooth: true },
-      { src: "projected_2035.png", on: true },
-    ],
-    stats: [
-      { v: "30 m", k: "Grid resolution" },
-      { v: "5–10 years", k: "Forecast horizon" },
-      { v: "Tested", k: "Against past years before use" },
-    ],
-    deliverables: [
-      { t: "Growth history", d: "Built-up land for every observed year." },
-      { t: "2030 & 2035 projections", d: "Low, central and high extents." },
-      { t: "Conversion probability", d: "Calibrated, cell by cell." },
-      { t: "Hindcast report", d: "Tested against a no-change map." },
-    ],
-    informs: ["Master-plan base maps", "Road and utility sequencing", "Land reservation ahead of growth"],
-  },
-  {
-    slug: "site-selection",
-    name: "Site Suitability & Selection",
-    short: "A ranked shortlist of real sites, with reasons.",
-    headline: "Pick the site before the brief.",
-    lede: "Every 30 m cell scored on published criteria, grouped into buildable zones and ranked.",
-    layers: [{ src: "suitability.png", on: true, smooth: true, opacity: 0.85 }],
-    overlay: "zones",
-    stats: [
-      { v: "30 m", k: "Every cell scored" },
-      { v: "Ranked", k: "Shortlist with reasons" },
-      { v: "Stress-tested", k: "Under changed assumptions" },
-    ],
-    deliverables: [
-      { t: "Suitability surface", d: "Six weighted criteria at 30 m." },
-      { t: "Ranked zones", d: "Contiguous, buildable, road-accessible." },
-      { t: "Sensitivity sweeps", d: "Which picks survive other choices." },
-      { t: "Programme scoring", d: "Joint coverage for multi-site plans." },
-    ],
-    informs: ["Land shortlists for feasibility", "Architect and planner briefs", "Multi-site programme sizing"],
-  },
-  {
-    slug: "accessibility-analysis",
-    name: "Accessibility & Service Gaps",
-    short: "Drive time to care, measured on real roads.",
-    headline: "Measure access in minutes.",
-    lede: "Travel time along the actual road network, weighted by where people live.",
-    layers: [{ src: "travel_time.png", on: true, smooth: true, opacity: 0.9 }],
-    overlay: "facilities",
-    stats: [
-      { v: "Minutes", k: "Real travel time by road" },
-      { v: "People", k: "Coverage weighted by population" },
-      { v: "Per site", k: "Gain from each option" },
-    ],
-    deliverables: [
-      { t: "Drive-time surface", d: "Minutes to the nearest facility." },
-      { t: "Population coverage", d: "At 10, 15 and 20 minutes." },
-      { t: "Facility inventory", d: "Classified by capability." },
-      { t: "Gain per site", d: "Residents reached by each option." },
-    ],
-    informs: ["Service-gap identification", "Health and education equity", "Catchment planning"],
-  },
-  {
-    slug: "land-cover-mapping",
-    name: "Land-Cover Mapping",
-    short: "Built-up maps from free imagery, independently checked.",
-    headline: "Map the city as it is built.",
-    lede: "Built-up land classified from Landsat and scored against independent global products.",
+    slug: "earth-observation",
+    name: "Earth Observation",
+    short: "Satellite data systems that turn raw imagery into reliable maps of change.",
+    headline: "Satellite data, made dependable.",
+    lede: "We build pipelines that turn years of free satellite imagery into consistent, independently checked maps of how land is used.",
     layers: [
       { src: "built_2013.png", on: true, opacity: 0.7 },
       { src: "change_2013_2024.png", on: true },
     ],
     stats: [
-      { v: "30 m", k: "Satellite resolution" },
-      { v: "Yearly", k: "Change between years" },
-      { v: "Checked", k: "Against independent maps" },
+      { v: "30 m", k: "Mapping resolution" },
+      { v: "Multi-year", k: "Consistent time series" },
+      { v: "Independent", k: "Reference labels" },
     ],
-    deliverables: [
-      { t: "Built-up maps", d: "30 m, per year." },
-      { t: "Change detection", d: "What was built, and when." },
-      { t: "Accuracy assessment", d: "On withheld spatial blocks." },
-      { t: "Area tables", d: "On one consistent mask." },
+    builds: [
+      { t: "Imagery pipelines", d: "Scenes selected, cloud-masked and composited automatically." },
+      { t: "Built-up mapping", d: "Land classified on labels the model never learned from." },
+      { t: "Change detection", d: "What was built, where and when, on one grid." },
+      { t: "Accuracy assessment", d: "Every map scored on areas held back from training." },
     ],
-    informs: ["Unrecorded growth audits", "Ward and zoning reviews", "Baseline for every other service"],
+  },
+  {
+    slug: "geospatial-ai",
+    name: "Geospatial AI",
+    short: "Machine learning that learns how places change, not just what they look like.",
+    headline: "Machine learning that understands place.",
+    lede: "Our models learn from spatial context around every location, so they capture why land changes and not only how it appears from above.",
+    layers: [
+      { src: "built_2024.png", on: true, opacity: 0.3 },
+      { src: "growth_prob_2030.png", on: true, smooth: true },
+    ],
+    stats: [
+      { v: "Context-aware", k: "Neighbourhood features" },
+      { v: "Calibrated", k: "Probabilities you can read" },
+      { v: "Benchmarked", k: "Against simpler baselines" },
+    ],
+    builds: [
+      { t: "Spatial features", d: "Texture and context around each cell, not only its colour." },
+      { t: "Learned transitions", d: "Neural networks that learn which land converts, and why." },
+      { t: "Calibration", d: "A score of 0.8 means roughly 80%, checked on real outcomes." },
+      { t: "Model transparency", d: "Feature importance and baselines reported with every model." },
+    ],
+  },
+  {
+    slug: "predictive-simulation",
+    name: "Predictive Simulation",
+    short: "Simulation engines that run a city forward in time.",
+    headline: "Simulate the city before it grows.",
+    lede: "Our simulation engine runs a city forward year by year, redrawing the map at every step, to show where growth is heading.",
+    layers: [
+      { src: "built_2024.png", on: true, opacity: 0.55 },
+      { src: "projected_2035.png", on: true },
+    ],
+    stats: [
+      { v: "5–10 years", k: "Forecast horizon" },
+      { v: "Scenarios", k: "Low, central and high" },
+      { v: "Hindcast-tested", k: "Before it is trusted" },
+    ],
+    builds: [
+      { t: "Cellular automata", d: "The map updates every simulated year, so each step shapes the next." },
+      { t: "Measured growth", d: "How much a city grows comes from its record, never an assumption." },
+      { t: "Scenario ranges", d: "Low, central and high futures instead of a single guess." },
+      { t: "Hindcast testing", d: "Models must predict years we already know before they are used." },
+    ],
+  },
+  {
+    slug: "decision-systems",
+    name: "Spatial Decision Systems",
+    short: "Systems that turn forecasts into ranked, explainable decisions.",
+    headline: "Decisions you can explain.",
+    lede: "We combine forecasts with today's conditions into ranked options, with every weight, route and assumption on the table.",
+    layers: [{ src: "suitability.png", on: true, smooth: true, opacity: 0.85 }],
+    overlay: "zones",
+    stats: [
+      { v: "Road-network", k: "Travel-time routing" },
+      { v: "Population-weighted", k: "Coverage measures" },
+      { v: "Stress-tested", k: "Rankings" },
+    ],
+    builds: [
+      { t: "Multi-criteria scoring", d: "Published weights, checked for internal consistency." },
+      { t: "Network accessibility", d: "Travel time along real roads, weighted by where people live." },
+      { t: "Site ranking", d: "Contiguous, buildable options ranked by a published formula." },
+      { t: "Stress testing", d: "Rankings re-run under changed assumptions." },
+    ],
   },
 ];
 
-export type Product = {
+/* --------------------------------------------------------------- products */
+
+export const flagship = {
+  slug: "urban-growth-platform",
+  name: "Urban Growth Platform",
+  fullName: "CightX Urban Growth Platform",
+  status: "Live" as const,
+  tagline: "Predict where cities will grow before they do.",
+  short: "Forecasts urban growth and ranks where new infrastructure should go.",
+  lede: "The platform reads a city's satellite record, forecasts where it will grow, and ranks the best sites for new hospitals, schools and public services.",
+  modules: [
+    {
+      t: "Growth Forecasting",
+      d: "Built-up history and growth forecasts for the next 5 to 10 years.",
+      layers: [{ src: "built_2024.png", on: true, opacity: 0.45 }, { src: "projected_2035.png", on: true }] as Layer[],
+    },
+    {
+      t: "Site Selection",
+      d: "Ranked candidate sites, each with the reasons it ranked.",
+      layers: [{ src: "suitability.png", on: true, smooth: true, opacity: 0.85 }] as Layer[],
+      zones: true,
+    },
+    {
+      t: "Accessibility Analysis",
+      d: "Drive time to services, weighted by where people live.",
+      layers: [{ src: "travel_time.png", on: true, smooth: true, opacity: 0.9 }] as Layer[],
+    },
+    {
+      t: "Land-Cover Mapping",
+      d: "Yearly built-up maps from satellite imagery.",
+      layers: [{ src: "built_2013.png", on: true, opacity: 0.7 }, { src: "change_2013_2024.png", on: true }] as Layer[],
+    },
+  ],
+  questions: ["Where should the next hospital go?", "Which areas are underserved today?", "Will the site still fit in 2035?"],
+  audience: ["City corporations and planning departments", "Hospital and education groups", "Infrastructure agencies"],
+  poweredBy: ["earth-observation", "geospatial-ai", "predictive-simulation", "decision-systems"],
+};
+
+export type PlannedProduct = {
   slug: string;
   name: string;
   short: string;
-  status: "Live" | "Planned";
   headline: string;
   lede: string;
   questions: string[];
   audience: string[];
-  uses: string[]; // service slugs
+  poweredBy: string[];
   layers: Layer[];
 };
 
-export const products: Product[] = [
-  {
-    slug: "infrastructure-intelligence",
-    name: "Infrastructure Intelligence",
-    short: "Where hospitals, schools and civic facilities should go.",
-    status: "Live",
-    headline: "Site public infrastructure for the city ahead.",
-    lede: "Our flagship product, already running on a real city.",
-    questions: ["Where should the next hospital go?", "Which areas are underserved today?", "Will the site still fit in 2035?"],
-    audience: ["Municipal corporations", "State planning bodies", "Hospital and education groups"],
-    uses: ["urban-growth-forecasting", "site-selection", "accessibility-analysis", "land-cover-mapping"],
-    layers: [{ src: "suitability.png", on: true, smooth: true, opacity: 0.8 }],
-  },
+export const roadmap: PlannedProduct[] = [
   {
     slug: "commercial-intelligence",
     name: "Commercial Intelligence",
-    short: "Where a hotel, office, warehouse or store belongs.",
-    status: "Planned",
+    short: "Location decisions for offices, stores, hotels and warehouses.",
     headline: "Open where customers will be.",
-    lede: "The same engine, scored on commercial criteria for each sector.",
+    lede: "A planned CightX product that applies our forecasting and ranking technology to commercial location decisions.",
     questions: ["Where will demand be when the lease matures?", "Which corridors are about to grow?", "How do candidate sites compare?"],
     audience: ["Developers", "Retail and logistics groups", "Hospitality chains"],
-    uses: ["urban-growth-forecasting", "site-selection"],
+    poweredBy: ["predictive-simulation", "decision-systems"],
     layers: [{ src: "built_2024.png", on: true, opacity: 0.5 }, { src: "projected_2035.png", on: true }],
   },
   {
     slug: "risk-intelligence",
     name: "Risk Intelligence",
-    short: "Which zones a hazard would hit hardest.",
-    status: "Planned",
+    short: "Exposure of growing cities to hazards, known in advance.",
     headline: "Know exposure before the event.",
-    lede: "Growth forecasts overlaid with hazard layers, so exposure is known in advance.",
+    lede: "A planned CightX product that combines growth forecasts with hazard layers to show where exposure is rising.",
     questions: ["Where is new building moving into risk?", "Which assets are most exposed?", "Where should mitigation go first?"],
     audience: ["Disaster management agencies", "Insurers", "Civic bodies"],
-    uses: ["urban-growth-forecasting", "land-cover-mapping"],
+    poweredBy: ["earth-observation", "predictive-simulation"],
     layers: [{ src: "built_2024.png", on: true, opacity: 0.5 }, { src: "growth_prob_2030.png", on: true, smooth: true }],
   },
   {
     slug: "environmental-intelligence",
     name: "Environmental Intelligence",
-    short: "Where growth is closing in on water and green cover.",
-    status: "Planned",
+    short: "Where growth is closing in on green cover and water.",
     headline: "Evidence a policy can stand on.",
-    lede: "Change detection pointed at green cover and water bodies.",
+    lede: "A planned CightX product that points our change-detection technology at green cover and water bodies.",
     questions: ["Where is green cover disappearing?", "Which water bodies face encroachment?", "How fast is it happening?"],
     audience: ["Environmental agencies", "Urban local bodies", "Researchers"],
-    uses: ["land-cover-mapping", "urban-growth-forecasting"],
+    poweredBy: ["earth-observation", "geospatial-ai"],
     layers: [{ src: "built_2013.png", on: true, opacity: 0.6 }, { src: "change_2013_2024.png", on: true }],
   },
   {
     slug: "governance-intelligence",
     name: "Governance Intelligence",
     short: "Where people actually are, so services reach them.",
-    status: "Planned",
     headline: "Put services where people are.",
-    lede: "Population and access, measured between censuses.",
+    lede: "A planned CightX product that measures population and access between censuses.",
     questions: ["Which communities are furthest from services?", "Where has population outgrown provision?", "Where should outreach go first?"],
     audience: ["State departments", "District administrations", "Public health programmes"],
-    uses: ["accessibility-analysis", "urban-growth-forecasting"],
+    poweredBy: ["decision-systems", "geospatial-ai"],
     layers: [{ src: "travel_time.png", on: true, smooth: true, opacity: 0.85 }],
   },
 ];
 
-export const companyPages = [
-  { to: "/company/mission#mission", name: "Our Mission", short: "Infrastructure where people are going." },
-  { to: "/company/mission#vision", name: "Our Vision", short: "Every city decision backed by a tested forecast." },
-  { to: "/company/mission#values", name: "Our Values", short: "How we work." },
-  { to: "/company/technology", name: "Technology", short: "The engine and its validation gates." },
-  { to: "/company/research", name: "Research", short: "Manuscript, disclosure, open methods." },
-  { to: "/privacy-policy", name: "Privacy Policy", short: "How we handle your information." },
-];
+/* ---------------------------------------------------------- company pages */
+
+export const mission = {
+  statement: "Give every city the intelligence to build for the people it will have, not only the people it had.",
+  gap: [
+    { v: "2011", d: "The last census most plans still rely on." },
+    { v: "Decades", d: "How long a building stays where it is put." },
+    { v: "Every year", d: "How often a growing city changes shape." },
+  ],
+};
 
 export const vision = {
-  statement: "Every city decides where to build with a tested view of where it is going.",
+  statement: "Every city decides what to build with a tested view of where it is going.",
   pillars: [
     { t: "Beyond one city", d: "From one district to Tier-2 and Tier-3 cities across India." },
-    { t: "Beyond one facility", d: "Hospitals first, then schools, commerce, risk and environment." },
-    { t: "Beyond one decision", d: "A living forecast, refreshed as the satellite record grows." },
+    { t: "Beyond one product", d: "One technology base, powering products for infrastructure, commerce, risk and environment." },
+    { t: "Beyond one decision", d: "Living forecasts, refreshed as the satellite record grows." },
   ],
 };
 
 export const values = [
   { t: "No forecast without proof", d: "A projection must beat a no-change map before it counts." },
   { t: "Show the working", d: "Weights and formulas are published with every result." },
-  { t: "Open by default", d: "Built on free data anyone can re-check." },
-  { t: "Every site explained", d: "Each ranking comes with the reason behind it." },
+  { t: "Open by default", d: "Built on open data anyone can re-check." },
+  { t: "Explainable by design", d: "Every recommendation comes with the reason behind it." },
 ];
 
 export const journey = [
-  { t: "Prototype", d: "Growth model and siting engine built and tested on a real district." },
-  { t: "Independent validation", d: "Maps scored against three global reference products." },
-  { t: "Validation gates", d: "Hindcast and sensitivity testing built into the engine." },
+  { t: "Research foundation", d: "Growth modelling and siting methods developed at VIT Vellore." },
+  { t: "Technology base", d: "Earth observation, geospatial AI, simulation and decision systems built and validated." },
+  { t: "Flagship product", d: "The Urban Growth Platform, tested end to end on a real district." },
   { t: "Research outputs", d: "Manuscript and invention disclosure prepared." },
   { t: "Pilot cities", d: "Next: municipal pilots in Tamil Nadu.", next: true },
 ];
 
-export const findService = (slug?: string) => services.find((s) => s.slug === slug);
-export const findProduct = (slug?: string) => products.find((p) => p.slug === slug);
+export const findTechnology = (slug?: string) => technologies.find((t) => t.slug === slug);
+export const findPlanned = (slug?: string) => roadmap.find((p) => p.slug === slug);

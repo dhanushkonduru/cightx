@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import type { Product, Service } from "../content/catalog";
+import type { PlannedProduct, Technology } from "../content/catalog";
 import { Arrow } from "./Arrow";
+import { Mark } from "./Logo";
 import { MapStage, ZoneMarks, useVectors } from "./MapStage";
 
 export function StatusTag({ status }: { status: "Live" | "Planned" }) {
@@ -17,36 +18,41 @@ export function StatusTag({ status }: { status: "Live" | "Planned" }) {
   );
 }
 
-export function ServiceCard({ s, index }: { s: Service; index: number }) {
+/** Marks something as a product made by the company, never the company itself. */
+export function ProductBadge({ label = "A CightX product" }: { label?: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.14em] text-bone/60">
+      <Mark size={14} />
+      {label}
+    </span>
+  );
+}
+
+export function TechCard({ t, index }: { t: Technology; index: number }) {
   const v = useVectors();
   return (
-    <Link to={`/services/${s.slug}`} className="group relative flex h-full flex-col bg-ink p-6 transition-colors duration-500 hover:bg-ink-800 sm:p-7">
+    <Link to={`/technology/${t.slug}`} className="group relative flex h-full flex-col bg-ink p-6 transition-colors duration-500 hover:bg-ink-800 sm:p-7">
       <div className="flex items-center justify-between">
         <span className="font-mono text-[11px] text-laterite">0{index + 1}</span>
         <Arrow className="text-bone/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-laterite" />
       </div>
       <div className="mt-6 overflow-hidden">
         <div className="transition-transform duration-700 group-hover:scale-[1.04]">
-          <MapStage
-            alt=""
-            showScale={false}
-            layers={s.layers}
-            overlay={v && s.overlay === "zones" ? <ZoneMarks v={v} showPaths={false} /> : undefined}
-          />
+          <MapStage alt="" showScale={false} layers={t.layers} overlay={v && t.overlay === "zones" ? <ZoneMarks v={v} showPaths={false} /> : undefined} />
         </div>
       </div>
-      <h3 className="mt-6 text-[20px] font-medium leading-tight tracking-[-0.025em] text-bone">{s.name}</h3>
-      <p className="mt-2 text-[14.5px] leading-relaxed text-bone/55">{s.short}</p>
+      <h3 className="mt-6 text-[20px] font-medium leading-tight tracking-[-0.025em] text-bone">{t.name}</h3>
+      <p className="mt-2 text-[14.5px] leading-relaxed text-bone/55">{t.short}</p>
       <span className="absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-laterite transition-transform duration-500 group-hover:scale-x-100" />
     </Link>
   );
 }
 
-export function ProductTile({ p }: { p: Product }) {
+export function PlannedTile({ p }: { p: PlannedProduct }) {
   return (
     <Link to={`/products/${p.slug}`} className="group relative flex h-full flex-col bg-ink p-6 transition-colors duration-500 hover:bg-ink-800 sm:p-7">
       <div className="flex items-center justify-between">
-        <StatusTag status={p.status} />
+        <StatusTag status="Planned" />
         <Arrow className="text-bone/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-laterite" />
       </div>
       <h3 className="mt-10 text-[20px] font-medium leading-tight tracking-[-0.025em] text-bone">{p.name}</h3>

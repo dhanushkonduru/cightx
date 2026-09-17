@@ -3,10 +3,10 @@ import { Arrow } from "./Arrow";
 import { Reveal } from "./Reveal";
 
 export function CTABand({
-  title = "Bring us a city and a question.",
-  lede = "Tell us the facility and the horizon. We'll tell you what the evidence supports.",
+  title = "Work with CightX.",
+  lede = "Pilots, partnerships and research collaborations.",
   primary = { label: "Contact us", to: "/contact" },
-  secondary = { label: "How it works", to: "/company/technology" },
+  secondary = { label: "Our technology", to: "/technology" },
 }: {
   title?: string;
   lede?: string;

@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
+import { Arrow } from "../components/Arrow";
+import { PlannedTile, ProductBadge, StatusTag } from "../components/Cards";
 import { CTABand } from "../components/CTABand";
-import { ProductTile, StatusTag } from "../components/Cards";
-import { MapBand } from "../components/MapBand";
 import { PageHero } from "../components/PageHero";
+import { ProductWindow } from "../components/ProductWindow";
 import { Reveal } from "../components/Reveal";
 import { SectionHeader } from "../components/SectionHeader";
-import { products } from "../content/catalog";
+import { flagship, roadmap } from "../content/catalog";
 import { usePageMeta } from "../lib/usePageMeta";
 
 export default function Products() {
-  usePageMeta("Products", "Infrastructure Intelligence is live. Commercial, risk, environmental and governance intelligence are planned on the same engine.");
-  const [flagship, ...planned] = products;
+  usePageMeta(
+    "Products",
+    "Products built by CightX. Flagship: the CightX Urban Growth Platform. Planned: commercial, risk, environmental and governance intelligence.",
+  );
 
   return (
     <>
@@ -18,48 +21,58 @@ export default function Products() {
         eyebrow="Products"
         title={
           <>
-            One engine, <span className="font-serif font-normal italic">pointed at five questions.</span>
+            Products built on <span className="font-serif font-normal italic">CightX technology.</span>
           </>
         }
-        lede="Change the criteria, and the same validated pipeline answers a new question for a new customer."
+        lede="One product in the field today, four on the roadmap, all running on the same technology base."
       />
 
-      <MapBand layers={flagship.layers} overlay="zones" focus="top">
-        <Reveal className="w-full">
-          <div className="max-w-xl">
-            <StatusTag status="Live" />
-            <h2 className="mt-8 text-[clamp(2.2rem,4vw,3.6rem)] font-medium leading-[1.0] tracking-[-0.04em] text-bone">{flagship.name}</h2>
-            <p className="mt-4 max-w-lg text-[17px] text-bone/65">{flagship.lede}</p>
-            <ul className="mt-8 space-y-2">
-              {flagship.questions.map((q) => (
-                <li key={q} className="flex items-center gap-3 text-[15px] text-bone/85">
-                  <span className="h-px w-3 bg-laterite" />
-                  {q}
-                </li>
-              ))}
-            </ul>
-            <Link to={`/products/${flagship.slug}`} className="btn btn-primary mt-10">
-              <span className="btn-dot" />
-              View product
-            </Link>
-          </div>
-        </Reveal>
-      </MapBand>
-
-      <section className="bg-ink-900 py-20 lg:py-28">
+      <section className="py-20 lg:py-28">
         <div className="frame">
-          <SectionHeader label="Roadmap" title="Coming next." lede="Planned, not built. Each runs on the engine proven above." />
-          <div className="mt-12 grid gap-px border border-bone/10 bg-bone/10 sm:grid-cols-2 lg:grid-cols-4">
-            {planned.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 70} className="bg-ink">
-                <ProductTile p={p} />
-              </Reveal>
-            ))}
-          </div>
+          <SectionHeader label="Flagship" title="Available now." />
+          <Reveal className="mt-12">
+            <div className="grid items-center gap-12 border border-bone/10 p-6 sm:p-10 lg:grid-cols-12">
+              <div className="lg:col-span-5">
+                <div className="flex flex-wrap items-center gap-4">
+                  <ProductBadge />
+                  <StatusTag status="Live" />
+                </div>
+                <h2 className="mt-8 text-[clamp(2rem,3.6vw,3.2rem)] font-medium leading-[1.02] tracking-[-0.04em] text-bone">{flagship.name}</h2>
+                <p className="mt-4 font-serif text-[clamp(1.35rem,2.2vw,1.8rem)] italic leading-snug text-bone/80">{flagship.tagline}</p>
+                <p className="mt-4 max-w-md text-[16px] text-bone/60">{flagship.lede}</p>
+                <Link to={`/products/${flagship.slug}`} className="btn btn-primary mt-9">
+                  <span className="btn-dot" />
+                  View the platform
+                </Link>
+              </div>
+              <div className="lg:col-span-7">
+                <ProductWindow />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      <CTABand title="Have a question we haven't listed?" lede="If it's about where to build, the engine can probably be pointed at it." />
+      <section className="border-t border-bone/10 bg-ink-900 py-20 lg:py-28">
+        <div className="frame">
+          <SectionHeader label="Roadmap" title="Coming next." lede="Planned products. Each one reuses technology already built for the flagship." />
+          <div className="mt-12 grid gap-px border border-bone/10 bg-bone/10 sm:grid-cols-2 lg:grid-cols-4">
+            {roadmap.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 70} className="bg-ink">
+                <PlannedTile p={p} />
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-8">
+            <Link to="/technology" className="inline-flex items-center gap-2 text-[14px] text-laterite hover:text-laterite-soft">
+              The technology they share
+              <Arrow />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <CTABand title="Shape what we build next." lede="Early partners help define each product on our roadmap." primary={{ label: "Contact us", to: "/contact" }} secondary={{ label: "Our technology", to: "/technology" }} />
     </>
   );
 }

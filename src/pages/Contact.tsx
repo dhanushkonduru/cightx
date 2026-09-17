@@ -1,14 +1,14 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { PageHero } from "../components/PageHero";
-import { products, services } from "../content/catalog";
+import { flagship, roadmap, technologies } from "../content/catalog";
 import { company } from "../content/site";
 import { usePageMeta } from "../lib/usePageMeta";
 
 const NEXT = ["Tell us the city and the question.", "We scope it with you on a short call.", "You get a proposal: data, method, timeline."];
 
 export default function Contact() {
-  usePageMeta("Contact Us", "Talk to CightX about urban growth forecasting, site selection or a pilot for your city.");
+  usePageMeta("Contact Us", "Contact CightX about our technology, the Urban Growth Platform, pilots, research or careers.");
   const [sent, setSent] = useState(false);
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
@@ -35,10 +35,10 @@ export default function Contact() {
         eyebrow="Contact Us"
         title={
           <>
-            Let's talk about <span className="font-serif font-normal italic">where.</span>
+            Talk to <span className="font-serif font-normal italic">CightX.</span>
           </>
         }
-        lede="A city, a facility, a horizon. That's enough to start."
+        lede="Pilots, partnerships, research or careers. Tell us what you have in mind."
       />
 
       <section className="py-20 lg:py-28">
@@ -60,16 +60,18 @@ export default function Contact() {
               <span className="tick mb-2 block">Interested in</span>
               <select name="interest" className={field} defaultValue="A pilot for my city">
                 <option>A pilot for my city</option>
-                <optgroup label="Services">
-                  {services.map((s) => (
-                    <option key={s.slug}>{s.name}</option>
-                  ))}
-                </optgroup>
                 <optgroup label="Products">
-                  {products.map((p) => (
-                    <option key={p.slug}>{p.name}</option>
+                  <option>{flagship.fullName}</option>
+                  {roadmap.map((p) => (
+                    <option key={p.slug}>{p.name} (planned)</option>
                   ))}
                 </optgroup>
+                <optgroup label="Technology">
+                  {technologies.map((t) => (
+                    <option key={t.slug}>{t.name}</option>
+                  ))}
+                </optgroup>
+                <option>Partnership</option>
                 <option>Research collaboration</option>
                 <option>Careers</option>
                 <option>Something else</option>

@@ -30,13 +30,13 @@ export function Technology() {
       <div className="grid-bg pointer-events-none absolute inset-x-0 top-0 h-[520px] opacity-60" />
       <div className="frame relative">
         <SectionHeader
-          label="The engine"
+          label="How it fits together"
           title={
             <>
               Four stages. <span className="text-bone/45">Three gates.</span>
             </>
           }
-          lede="A component that fails its gate never reaches a recommendation."
+          lede="How our technologies combine inside a product. Anything that fails a gate never reaches a recommendation."
         />
 
         {/* pipeline rail */}

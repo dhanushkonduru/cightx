@@ -3,8 +3,8 @@
 
 export const company = {
   name: "CightX",
-  descriptor: "Decision intelligence for the built environment",
-  tagline: "Where to build next, before the city gets there.",
+  descriptor: "Geospatial & predictive AI",
+  tagline: "Building intelligence for the cities ahead.",
   email: "dhanush.konduru2022@vitstudent.ac.in",
   location: "VIT Vellore, Tamil Nadu, India",
 };
@@ -181,7 +181,7 @@ export const planning = [
 
 
 export const team = [
-  { name: "Dhanush Konduru", role: "Co-founder · Machine learning", note: "Classification, growth modelling and validation." },
-  { name: "Anusha B", role: "Co-founder · Platform", note: "The map-based planner and delivery platform." },
+  { name: "Dhanush Konduru", role: "Co-founder · Machine learning", note: "Machine learning, geospatial AI and validation." },
+  { name: "Anusha B", role: "Co-founder · Platform", note: "Product engineering and platform." },
   { name: "Prof. Sushanth S J", role: "Mentor", note: "Sustainable architecture, VIT Vellore." },
 ];

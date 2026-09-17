@@ -22,17 +22,17 @@ const WHY = [
 const mail = `mailto:${company.email}?subject=${encodeURIComponent("Careers at CightX")}`;
 
 export default function Careers() {
-  usePageMeta("Careers", "Join CightX and build decision intelligence for the built environment.");
+  usePageMeta("Careers", "Join CightX, a geospatial and predictive AI company building intelligence for the cities ahead.");
   return (
     <>
       <PageHero
         eyebrow="Careers"
         title={
           <>
-            Help decide <span className="font-serif font-normal italic">where cities build.</span>
+            Build intelligence <span className="font-serif font-normal italic">for the cities ahead.</span>
           </>
         }
-        lede="We're a small, early team in Vellore. We want to hear from people who care about cities and data."
+        lede="CightX is a small, early deep-tech team in Vellore. We want to hear from engineers and researchers who care about cities and data."
         actions={
           <a href={mail} className="btn btn-primary">
             <span className="btn-dot" />
@@ -83,7 +83,7 @@ export default function Careers() {
         </div>
       </section>
 
-      <CTABand title="Don't see your area?" lede="Write to us anyway." primary={{ label: "Contact us", to: "/contact" }} secondary={{ label: "About CightX", to: "/about" }} />
+      <CTABand title="Don't see your area?" lede="Write to us anyway." primary={{ label: "Contact us", to: "/contact" }} secondary={{ label: "About CightX", to: "/company" }} />
     </>
   );
 }

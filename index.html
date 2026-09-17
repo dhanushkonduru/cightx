@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>CightX — Where to build next, before the city gets there</title>
-    <meta name="description" content="CightX is a decision intelligence company for the built environment. We forecast urban growth from satellite imagery, test every forecast against history, and return ranked, evidence-backed sites for hospitals and public infrastructure." />
+    <title>CightX — Building intelligence for the cities ahead</title>
+    <meta name="description" content="CightX is a geospatial and predictive AI company building Earth observation, geospatial AI, simulation and decision systems for cities. Flagship product: the CightX Urban Growth Platform." />
     <meta name="theme-color" content="#07080A" />
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -14,14 +14,14 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://cightx.vercel.app/" />
     <meta property="og:site_name" content="CightX" />
-    <meta property="og:title" content="CightX — Where to build next, before the city gets there" />
-    <meta property="og:description" content="Decision intelligence for the built environment: forecasts of how cities grow, and clear answers on where to build next." />
+    <meta property="og:title" content="CightX — Building intelligence for the cities ahead" />
+    <meta property="og:description" content="Geospatial and predictive AI company. Flagship product: the CightX Urban Growth Platform, which predicts where cities will grow before they do." />
     <meta property="og:image" content="https://cightx.vercel.app/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CightX — Where to build next, before the city gets there" />
-    <meta name="twitter:description" content="Urban growth forecasting and infrastructure siting from open satellite data, tested against history before it counts." />
+    <meta name="twitter:title" content="CightX — Building intelligence for the cities ahead" />
+    <meta name="twitter:description" content="Geospatial and predictive AI company. Flagship product: the CightX Urban Growth Platform, which predicts where cities will grow before they do." />
     <meta name="twitter:image" content="https://cightx.vercel.app/og-image.png" />
 
     <link rel="preload" href="/data/vellore_field.bin" as="fetch" crossorigin />
@@ -29,17 +29,33 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "CightX",
-        "description": "Decision intelligence for the built environment: satellite-derived urban growth forecasting and validated infrastructure siting.",
-        "slogan": "Where to build next, before the city gets there.",
-        "email": "dhanush.konduru2022@vitstudent.ac.in",
-        "location": { "@type": "Place", "name": "Vellore, Tamil Nadu, India" },
-        "founder": [
-          { "@type": "Person", "name": "Dhanush Konduru" },
-          { "@type": "Person", "name": "Anusha B" }
-        ],
-        "knowsAbout": ["Urban growth modelling", "Remote sensing", "Land use and land cover classification", "Multi-criteria site suitability", "Healthcare facility siting"]
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://cightx.vercel.app/#org",
+            "name": "CightX",
+            "url": "https://cightx.vercel.app/",
+            "logo": "https://cightx.vercel.app/brand/cightx-symbol-ink.svg",
+            "slogan": "Building intelligence for the cities ahead.",
+            "description": "Geospatial and predictive AI company building Earth observation, geospatial AI, predictive simulation and spatial decision systems for the built environment.",
+            "email": "dhanush.konduru2022@vitstudent.ac.in",
+            "location": { "@type": "Place", "name": "Vellore, Tamil Nadu, India" },
+            "founder": [
+              { "@type": "Person", "name": "Dhanush Konduru" },
+              { "@type": "Person", "name": "Anusha B" }
+            ],
+            "knowsAbout": ["Earth observation", "Geospatial AI", "Predictive simulation", "Spatial decision systems", "Urban intelligence"]
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "CightX Urban Growth Platform",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "description": "Predicts where cities will grow and ranks where new infrastructure should go.",
+            "url": "https://cightx.vercel.app/products/urban-growth-platform",
+            "publisher": { "@id": "https://cightx.vercel.app/#org" }
+          }
+        ]
       }
     </script>
     <style>
