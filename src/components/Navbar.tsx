@@ -94,7 +94,7 @@ export function Navbar() {
       >
         <div className="frame flex h-[68px] items-center justify-between">
           <Link to="/" aria-label="CightX home">
-            <Logo />
+            <Logo height={30} />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">

@@ -17,7 +17,7 @@ export function Footer() {
     <footer className="border-t border-bone/10 bg-ink-900">
       <div className="frame grid gap-12 py-16 md:grid-cols-12">
         <div className="md:col-span-3">
-          <Logo />
+          <Logo height={34} />
           <p className="mt-5 max-w-xs text-[15px] leading-relaxed text-bone/55">{company.tagline}</p>
           <a href={`mailto:${company.email}`} className="mt-6 block break-all font-mono text-[11px] text-bone/50 hover:text-bone">
             {company.email}
