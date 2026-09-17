@@ -18,7 +18,7 @@ function webglAvailable() {
   }
 }
 
-function useCanRender3D() {
+export function useCanRender3D() {
   return useMemo(() => {
     if (typeof window === "undefined") return false;
     const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };

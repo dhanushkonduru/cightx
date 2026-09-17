@@ -2,12 +2,6 @@ import { MapStage, ZoneMarks, useVectors, type Layer } from "../components/MapSt
 import { Reveal } from "../components/Reveal";
 import { planning } from "../content/site";
 
-const STRIP: { step: string; title: string; note: string; layers: Layer[]; zones?: boolean }[] = [
-  { step: "Before", title: "The city as it was", note: "Built-up land today", layers: [{ src: "built_2013.png", on: true }] },
-  { step: "Analysis", title: "What changed", note: "New growth, off the record", layers: [{ src: "built_2013.png", on: true, opacity: 0.6 }, { src: "change_2013_2024.png", on: true }] },
-  { step: "Prediction", title: "Where it goes next", note: "Forecast growth", layers: [{ src: "built_2024.png", on: true, opacity: 0.6 }, { src: "projected_2035.png", on: true }] },
-  { step: "Planning insight", title: "Where to build", note: "Ranked candidate sites", layers: [{ src: "suitability.png", on: true, smooth: true, opacity: 0.85 }], zones: true },
-];
 
 function layersFor(key: string): Layer[] {
   switch (key) {
@@ -20,27 +14,6 @@ function layersFor(key: string): Layer[] {
     default:
       return [{ src: "suitability.png", on: true, smooth: true, opacity: 0.75 }];
   }
-}
-
-export function PlanningStrip() {
-  const v = useVectors();
-  return (
-    <div className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4 lg:gap-6">
-      {STRIP.map((s, i) => (
-        <Reveal key={s.step} delay={i * 110}>
-          <div className="mb-3 flex items-center gap-2">
-            <span className={`font-mono text-[10.5px] uppercase tracking-[0.14em] ${i === 3 ? "text-laterite" : "text-bone/50"}`}>
-              {String(i + 1).padStart(2, "0")} · {s.step}
-            </span>
-            {i < 3 && <span className="hidden h-px flex-1 bg-gradient-to-r from-bone/25 to-transparent lg:block" />}
-          </div>
-          <MapStage alt={`${s.step}: ${s.title}`} layers={s.layers} showScale={false} overlay={s.zones && v ? <ZoneMarks v={v} showPaths={false} /> : undefined} />
-          <p className="mt-3 text-[15px] font-medium tracking-[-0.01em] text-bone">{s.title}</p>
-          <p className="font-mono text-[10.5px] text-bone/45">{s.note}</p>
-        </Reveal>
-      ))}
-    </div>
-  );
 }
 
 export function PlanningRows() {

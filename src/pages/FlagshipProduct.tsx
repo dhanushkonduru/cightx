@@ -10,7 +10,10 @@ import { SectionHeader } from "../components/SectionHeader";
 import { flagship, technologies } from "../content/catalog";
 import { vellore } from "../content/site";
 import { usePageMeta } from "../lib/usePageMeta";
-import { PlanningRows, PlanningStrip } from "../sections/Planning";
+import { Criteria } from "../sections/Criteria";
+import { GrowthTimeline } from "../sections/GrowthTimeline";
+import { PlanningRows } from "../sections/Planning";
+import { Technology } from "../sections/Technology";
 import { Impact, VelloreExplorer, WithWithout } from "../sections/Vellore";
 
 const GATES = [
@@ -91,15 +94,23 @@ export default function FlagshipProduct() {
         </div>
       </section>
 
-      {/* workflow */}
-      <section className="border-t border-bone/10 bg-ink-900 py-24 lg:py-28">
-        <div className="frame">
-          <SectionHeader label="How it works" title="From satellite record to ranked sites." />
-          <div className="mt-12">
-            <PlanningStrip />
-          </div>
-        </div>
-      </section>
+      {/* the living timeline: observed years, forecast, ranked zones */}
+      <GrowthTimeline />
+
+      {/* how it works: auto-advancing stages with the map changing */}
+      <Technology
+        id="how-it-works"
+        label="How it works"
+        title={
+          <>
+            From satellite record <span className="text-bone/45">to ranked sites.</span>
+          </>
+        }
+        lede="Four stages inside the platform, each with a check. Anything that fails a gate never reaches a recommendation."
+      />
+
+      {/* scoring: the layer stack that spreads as you scroll */}
+      <Criteria />
 
       {/* who and why */}
       <section className="py-24 lg:py-28">

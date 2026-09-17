@@ -5,7 +5,7 @@ export const company = {
   name: "CightX",
   descriptor: "Geospatial & predictive AI",
   tagline: "Building intelligence for the cities ahead.",
-  email: "dhanush.konduru2022@vitstudent.ac.in",
+  email: "cightx.official@gmail.com",
   location: "VIT Vellore, Tamil Nadu, India",
 };
 
@@ -107,6 +107,16 @@ export const stages: Stage[] = [
     layer: "zones",
     gate: { name: "Gate 3 · stress test", result: "Top picks re-checked under changed assumptions" },
   },
+];
+
+// data/processed/ahp/ahp_weights.json via README AHP table (hospital siting template)
+export const criteria = [
+  { id: "c1", name: "Population density", weight: 34.1, from: "WorldPop 2020, 450 m moving mean" },
+  { id: "c2", name: "Service gap", weight: 20.5, from: "Network travel time to inpatient care" },
+  { id: "c3", name: "Growth alignment", weight: 20.5, from: "Distance to 2030–35 growth hotspots", forecast: true },
+  { id: "c4", name: "Road access", weight: 12.3, from: "Distance to OSM road network" },
+  { id: "c5", name: "Water proximity", weight: 7.6, from: "JRC Global Surface Water buffer" },
+  { id: "c6", name: "Land availability", weight: 5.0, from: "Non-built, non-water cells" },
 ];
 
 // data/processed/audit/coverage_population_weighted.json, baseline_vs_prospective.json

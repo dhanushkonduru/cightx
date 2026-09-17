@@ -7,7 +7,17 @@ import { prefersReducedMotion, useInView } from "../lib/useInView";
 
 const CYCLE = 7000;
 
-export function Technology() {
+export function Technology({
+  label = "How it fits together",
+  title,
+  lede = "How our technologies combine inside a product. Anything that fails a gate never reaches a recommendation.",
+  id = "technology",
+}: {
+  label?: string;
+  title?: React.ReactNode;
+  lede?: string;
+  id?: string;
+} = {}) {
   const [active, setActive] = useState(0);
   const [manual, setManual] = useState(false);
   const [ref, inView] = useInView<HTMLDivElement>({}, false);
@@ -26,17 +36,19 @@ export function Technology() {
   };
 
   return (
-    <section id="technology" className="relative border-t border-bone/10 bg-ink-900 py-24 lg:py-32">
+    <section id={id} className="relative border-t border-bone/10 bg-ink-900 py-24 lg:py-32">
       <div className="grid-bg pointer-events-none absolute inset-x-0 top-0 h-[520px] opacity-60" />
       <div className="frame relative">
         <SectionHeader
-          label="How it fits together"
+          label={label}
           title={
-            <>
-              Four stages. <span className="text-bone/45">Three gates.</span>
-            </>
+            title ?? (
+              <>
+                Four stages. <span className="text-bone/45">Three gates.</span>
+              </>
+            )
           }
-          lede="How our technologies combine inside a product. Anything that fails a gate never reaches a recommendation."
+          lede={lede}
         />
 
         {/* pipeline rail */}
